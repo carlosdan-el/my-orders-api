@@ -125,5 +125,32 @@ namespace Application.Controllers
                 });
             }
         }
+    
+        [HttpDelete]
+        [Route("{id}")]
+        public async Task<ActionResult> Delete(string id)
+        {
+            try
+            {
+                await _service.DeleteProductAsync(id);
+                return NoContent();
+            }
+            catch(InvalidOperationException error)
+            {
+                return BadRequest(new { 
+                    error = error.Message,
+                    source = error.Source,
+                    stackTrace = error.StackTrace
+                });
+            }
+            catch(Exception error)
+            {
+                return BadRequest(new { 
+                    error = error.Message,
+                    source = error.Source,
+                    stackTrace = error.StackTrace
+                });
+            }
+        }
     }
 }

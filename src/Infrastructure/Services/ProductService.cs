@@ -86,5 +86,14 @@ namespace Infrastructure.Services
                 await connection.ExecuteAsync(procedureName, values, commandType: CommandType.StoredProcedure);
             }
         }
+    
+        public async Task DeleteProductAsync(string id)
+        {
+            using(SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                await connection
+                .QueryAsync("DELETE FROM Products WHERE id = @Id", new { Id = id });
+            }
+        }
     }
 }
