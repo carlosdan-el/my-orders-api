@@ -17,11 +17,11 @@ namespace Infrastructure.Services
             .GetConnectionString("DataBaseConnection");
         }
 
-        public async Task<List<Category>> GetCategoriesAsync()
+        public async Task<List<ProductCategory>> GetCategoriesAsync()
         {
             using(SqlConnection connection = new SqlConnection(_connectionString))
             {
-                var response = await connection.QueryAsync<Category>("SELECT * FROM Categories WITH (NOLOCK)");
+                var response = await connection.QueryAsync<ProductCategory>("SELECT * FROM Categories WITH (NOLOCK)");
                 return response.ToList();
             }
         }

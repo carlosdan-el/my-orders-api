@@ -26,10 +26,8 @@ namespace Application.Controllers
             try
             {
                 string view = HttpContext.Request.Query["view"].ToString();
-                
-                if(view == "Report") {
-                    return Ok(await _service.GetProductsToReportAsync());
-                }
+
+                //return Ok(new {message = "Hello world!!!"});
 
                 return Ok(await _service.GetProductsAsync());
             }
@@ -59,8 +57,8 @@ namespace Application.Controllers
                     product.UpdatedBy = "1";
                 }
 
-                if(String.IsNullOrEmpty(product.Name) || String.IsNullOrEmpty(product.CategoryId)
-                || product.Price <= 0 || String.IsNullOrWhiteSpace(product.SubCategoryId))
+                if(String.IsNullOrEmpty(product.Name) || String.IsNullOrEmpty(product.ProductCategoryId)
+                || product.Price <= 0 || String.IsNullOrWhiteSpace(product.ProductTypeId))
                 {
                     throw new InvalidOperationException("Todos os campos obrigatórios devem ser preenchidos.");
                 }
@@ -98,8 +96,8 @@ namespace Application.Controllers
                     product.UpdatedBy = "1";
                 }
 
-                if(String.IsNullOrEmpty(product.Name) || String.IsNullOrEmpty(product.CategoryId)
-                || product.Price <= 0 || String.IsNullOrWhiteSpace(product.SubCategoryId))
+                if(String.IsNullOrEmpty(product.Name) || String.IsNullOrEmpty(product.ProductCategoryId)
+                || product.Price <= 0 || String.IsNullOrWhiteSpace(product.ProductTypeId))
                 {
                     throw new InvalidOperationException("Todos os campos obrigatórios devem ser preenchidos.");
                 }

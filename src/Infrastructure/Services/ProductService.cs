@@ -27,16 +27,6 @@ namespace Infrastructure.Services
             }
         }
 
-        public async Task<List<ProductReport>> GetProductsToReportAsync()
-        {
-            using(SqlConnection connection = new SqlConnection(_connectionString))
-            {
-                string procedureName = "SelectProducts";
-                var response = await connection.QueryAsync<ProductReport>(procedureName, commandType: CommandType.StoredProcedure);
-                return response.ToList();
-            }
-        }
-
         public async Task<Product> GetProductByIdAsync(string id)
         {
             using(SqlConnection connection = new SqlConnection(_connectionString))
@@ -52,11 +42,9 @@ namespace Infrastructure.Services
                 string procedureName = "InsertProduct";
                 var values = new {
                     Name = product.Name,
-                    BrandId = product.BrandId,
-                    CategoryId = product.CategoryId,
-                    SubCategoryId = product.SubCategoryId,
-                    TypeId = product.TypeId,
-                    ModelId = product.ModelId,
+                    ProductCategoryId = product.ProductCategoryId,
+                    ProductTypeId = product.ProductTypeId,
+                    ProductSizeId = product.ProductSizeId,
                     Price = product.Price,
                     Description = product.Description,
                     UpdatedBy = product.UpdatedBy
@@ -73,11 +61,9 @@ namespace Infrastructure.Services
                 var values = new {
                     Id = product.Id,
                     Name = product.Name,
-                    BrandId = product.BrandId,
-                    CategoryId = product.CategoryId,
-                    SubCategoryId = product.SubCategoryId,
-                    TypeId = product.TypeId,
-                    ModelId = product.ModelId,
+                    ProductCategoryId = product.ProductCategoryId,
+                    ProductTypeId = product.ProductTypeId,
+                    ProductSizeId = product.ProductSizeId,
                     Price = product.Price,
                     Description = product.Description,
                     UpdatedBy = product.UpdatedBy

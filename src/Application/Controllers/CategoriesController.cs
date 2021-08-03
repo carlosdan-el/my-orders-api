@@ -20,7 +20,7 @@ namespace Application.Controllers
 
         [HttpGet]
         [Route("")]
-        public async Task<ActionResult<List<Category>>> GetAsync()
+        public async Task<ActionResult<List<ProductCategory>>> GetAsync()
         {
             var response = await _service.GetCategoriesAsync();
             return Ok(response);

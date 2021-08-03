@@ -5,17 +5,18 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 namespace MyOrdersApi
 {
     public class Startup
     {
+        public IConfiguration Configuration { get; }
+        
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
-
-        public IConfiguration Configuration { get; }
 
         public void ConfigureServices(IServiceCollection services)
         {
@@ -25,9 +26,7 @@ namespace MyOrdersApi
 
             services.AddScoped<ProductService>();
             services.AddScoped<CategoryService>();
-            services.AddScoped<SubCategoryService>();
             services.AddScoped<ProductTypeService>();
-            services.AddScoped<ProductModelService>();
             services.AddScoped<OrderService>();
 
             services.AddCors(c => {
@@ -36,24 +35,26 @@ namespace MyOrdersApi
                 .AllowAnyMethod()
                 .AllowAnyHeader());
             });
-
-            services.AddMvc();
+            services.AddControllers();
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
+            if(env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
-            else
-            {
-                app.UseHsts();
-            }
 
+            app.UseRouting();
+            app.UseHsts();
             app.UseCors();
             app.UseHttpsRedirection();
-            app.UseMvc();
+            app.UseAuthorization();
+            
+            app.UseEndpoints(endpoints => {
+                endpoints.MapControllers();
+            });
+
         }
     }
 }
