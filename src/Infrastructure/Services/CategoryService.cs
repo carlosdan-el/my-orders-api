@@ -13,8 +13,7 @@ namespace Infrastructure.Services
         private readonly string _connectionString;
         public CategoryService(IConfiguration configuration)
         {
-            _connectionString = configuration
-            .GetConnectionString("DataBaseConnection");
+            _connectionString = configuration.GetConnectionString("DataBaseConnection");
         }
 
         public async Task<List<ProductCategory>> GetCategoriesAsync()

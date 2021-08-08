@@ -28,6 +28,7 @@ namespace MyOrdersApi
             services.AddScoped<CategoryService>();
             services.AddScoped<ProductTypeService>();
             services.AddScoped<OrderService>();
+            services.AddScoped<ProductCategoryService>();
 
             services.AddCors(c => {
                 c.AddPolicy("AllowOrigin", options => options

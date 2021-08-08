@@ -1,6 +1,6 @@
 -- *****************************************************************************
 -- Created by: Carlos Daniel
--- Created at: 2021/08/02
+-- Created at: 2021/08/07
 -- Updated by: -
 -- Updated at: -
 -- ***************************************************************************** 
@@ -24,7 +24,7 @@ CREATE TABLE tbUser (
     Name VARCHAR(255) NOT NULL,
     Email VARCHAR(255) NOT NULL,
     PhoneNumber VARCHAR(15),
-    RoleId VARCHAR(36) FOREIGN KEY REFERENCES tbRole(Id) NOT NULL
+    RoleId VARCHAR(36) FOREIGN KEY REFERENCES tbRole(Id) NOT NULL,
     CreatedBy VARCHAR(36) NOT NULL,
     CreatedAt DATETIME NOT NULL,
     UpdatedBy VARCHAR(36) NOT NULL,
@@ -87,7 +87,7 @@ CREATE TABLE tbOrder (
     UpdatedAt DATETIME NOT NULL
 )
 
-CREATE tbOrderItem (
+CREATE TABLE tbOrderItem (
     Id VARCHAR(36) PRIMARY KEY,
     OrderId VARCHAR(36) FOREIGN KEY REFERENCES tbOrder(Id) NOT NULL,
     ProductId VARCHAR(36) FOREIGN KEY REFERENCES tbProduct(Id) NOT NULL,

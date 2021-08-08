@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Domain.Entities;
 using Infrastructure.Services;
+using Infrastructure.Utils;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
@@ -23,7 +24,7 @@ namespace Application.Controllers
         public async Task<ActionResult<List<ProductCategory>>> GetAsync()
         {
             var response = await _service.GetCategoriesAsync();
-            return Ok(response);
+            return Ok(JsonResponseRequest.Success(response, 200));
         }
     }
 }
